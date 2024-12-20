@@ -1,0 +1,17 @@
+{
+  "name": "proxy",
+  "version": "1.0.0",
+  "description": "Simple proxy using Node.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Ismaïl NGUYEN <dev@ismailnguyen.com>",
+  "license": "WTFPL",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "express": "^4.21.2",
+    "url": "^0.11.4"
+  }
+}
