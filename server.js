@@ -37,6 +37,25 @@ function parseURL(req_url) {
     return parsed;
   }
 
+// endpoint to install app in Shopify
+// will redirect to the Shopify OAuth flow
+app.get('/install', (req, res) => {
+    const { shop, api_key } = req.query;
+    if (!shop || !api_key) {
+        return res.status(400).send({ error: 'Missing required parameters' });
+    }
+
+    const redirectUri = `${req.protocol}://${req.get('host')}/install/callback`;
+    const installUrl = `https://${shop}/admin/oauth/authorize?client_id=${api_key}&redirect_uri=${redirectUri}`;
+
+    res.redirect(installUrl);
+});
+
+// confirmation of installation
+app.get('/install/callback', (req, res) => {
+    res.status(200).send('App installed successfully, enjoy proxied requests! (See usage instructions at https://github.com/ismailnguyen/shopify-proxy/blob/main/README.md)');
+})
+
 app.get('/*', async (req, res) => {
     // Reconstruct the full target URL
     let targetUrl = req.params[0];
